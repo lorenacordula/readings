@@ -12,9 +12,12 @@ info:
         version: '@info.app.version@'
         grailsVersion: '@info.app.grailsVersion@'
 spring:
+    main:
+        banner-mode: "off"
     groovy:
         template:
             check-template-location: false
+
 # Spring Actuator Endpoints are Disabled by Default
 endpoints:
     enabled: false
@@ -85,27 +88,35 @@ hibernate:
         use_query_cache: false
         region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
+# dataSource:
+#     pooled: true
+#     jmxExport: true
+#     driverClassName: org.h2.Driver
+#     username: sa
+#     password:
+
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: "com.mysql.jdbc.Driver"
-    dialect: "org.hibernate.dialect.MySQL5InnnoDBDialect" #provavelmente isso não seja necessário
+    driverClassName: com.mysql.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     username: root
-    password: lorena
+    password: senha
 
 environments:
     development:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://localhost/readings
+            url: jdbc:mysql://localhost:3306/readings_in_grails
+            # url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://localhost/readings
+            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:
         dataSource:
-            dbCreate: update
-            url: jdbc:mysql://localhost/readings
+            dbCreate: none
+            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
             properties:
                 jmxEnabled: true
                 initialSize: 5
