@@ -101,14 +101,13 @@ dataSource:
     driverClassName: com.mysql.jdbc.Driver
     dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     username: root
-    password: senha
+    password: lorena
 
 environments:
     development:
         dataSource:
             dbCreate: update
-            url: jdbc:mysql://localhost:3306/readings_in_grails
-            # url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            url: jdbc:mysql://localhost:3306/readings
     test:
         dataSource:
             dbCreate: update
